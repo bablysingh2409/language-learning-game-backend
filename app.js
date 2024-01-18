@@ -3,6 +3,7 @@ const mongoose=require('mongoose');
 const cors=require('cors');
 const cookieParser=require('cookie-parser');
 const auth=require('./routes/auth');
+const user=require('./routes/user');
 
 const app=express();
 
@@ -14,7 +15,8 @@ mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlPars
 .then(() => console.log('Connected to MongoDB'))
 .catch((err) => console.error('Error connecting to MongoDB:', err));
 
-app.use('/auth',auth)
+app.use('/auth',auth);
+app.use('/user',user);
 app.use((err,req,res,next)=>{
     const errorStatus=err.status||500;
     const errMsg=err.message|| "something went wrong";
