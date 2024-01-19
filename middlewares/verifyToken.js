@@ -11,7 +11,6 @@ const verifyToken=(req,res,next)=>{
     };
     jwt.verify(token,process.env.JWT_SECRET,(err,user)=>{
         if(err) return next(createError(403,"token is not valid"));
-        console.log(user)
         req.user=user;
         next();
     })
@@ -21,7 +20,6 @@ const verifyToken=(req,res,next)=>{
 const verifyUser=(req,res,next)=>{
    
     verifyToken(req,res,()=>{
-        console.log(req.params)
        if(req.user.id==req.params.id){  
         next();
        }

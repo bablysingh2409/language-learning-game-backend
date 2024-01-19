@@ -7,6 +7,7 @@ const user=require('./routes/user');
 const saveExerciseToDB=require('./services/saveExercise');
 const exercise=require('./routes/exercise');
 const Exercise=require('./models/Exercise');
+const leaderboard=require('./routes/leaderboard');
 
 const app=express();
 
@@ -40,6 +41,7 @@ mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlPars
 app.use('/auth',auth);
 app.use('/user',user);
 app.use('/exercise',exercise);
+app.use('/leaderboard',leaderboard);
 
 app.use((err,req,res,next)=>{
     const errorStatus=err.status||500;
