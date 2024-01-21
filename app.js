@@ -15,7 +15,7 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect('mongodb://0.0.0.0:27017/languageLearningDB', { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');
 
