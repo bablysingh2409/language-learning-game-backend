@@ -16,8 +16,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlParser: true, useUnifiedTopology: true })
-.then(() => console.log('Connected to MongoDB'))
-.catch((err) => console.error('Error connecting to MongoDB:', err) .then(() => {
+  .then(() => {
     console.log('Connected to MongoDB');
 
     // Checking if data exists before saving
@@ -26,7 +25,7 @@ mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlPars
         console.error('Error checking existing data:', err.message);
       } else {
         if (count === 0) {
-          // if Data doesn't exist,then  save it
+          // if Data doesn't exist, then save it
           saveExerciseToDB();
         } else {
           console.log('Data already exists in the database.');
@@ -34,7 +33,9 @@ mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlPars
       }
     });
   })
-  .catch((err) => console.error('Error connecting to MongoDB:', err)));
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
+  });
 
 
 
