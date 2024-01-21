@@ -6,13 +6,13 @@ const submitScore = async (req, res,next) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       req.params.id,
-      { $inc: { [`scores.${language}`]: score } },
+      { $set: { [`scores.${language}`]: score } },
       { new: true }
     );
 
     res.json(updatedUser.scores);
   } catch (err) {
-    next(err)
+    next(err) 
   }
 };
 
