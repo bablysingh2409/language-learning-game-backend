@@ -15,24 +15,21 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 
-mongoose.connect('mongodb://localhost:27017/languageLearningDB', { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => {
-    console.log('Connected to MongoDB');
+mongoose.connect('mongodb+srv://bablySingh:lovelybably@cluster0.yk5hz5u.mongodb.net/learning-language?retryWrites=true&w=majority'
+ ) 
+ .then(async () => {
+  console.log('Connected to MongoDB');
 
-    // Checking if data exists before saving
-    Exercise.countDocuments({}, (err, count) => {
-      if (err) {
-        console.error('Error checking existing data:', err.message);
-      } else {
-        if (count === 0) {
-          // if Data doesn't exist, then save it
-          saveExerciseToDB();
-        } else {
-          console.log('Data already exists in the database.');
-        }
-      }
-    });
-  })
+  // Checking if data exists before saving
+  const count = await Exercise.countDocuments({});
+  
+  if (count === 0) {
+    // if Data doesn't exist, then save it
+    saveExerciseToDB();
+  } else {
+    console.log('Data already exists in the database.');
+  }
+})
   .catch((err) => {
     console.error('Error connecting to MongoDB:', err);
   });
@@ -60,3 +57,7 @@ app.use((err,req,res,next)=>{
 app.listen('5800',()=>{
     console.log('server is running on port 5800');
 })
+
+// mongodb+srv://bablySingh:<password>@cluster0.yk5hz5u.mongodb.net/?retryWrites=true&w=majority
+
+// mongodb+srv://bablySingh:<password>@cluster0.yk5hz5u.mongodb.net/
